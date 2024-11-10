@@ -1,0 +1,101 @@
+:root {
+  /* Cores */
+  --color-border: #ccc;
+  --color-focus: #3d3d3d;
+  --color-button-s: #f1f7fc;
+  --color-button-s-hover: #6d6d6d;
+  --color-shadow-focus: rgba(139, 69, 19, 0.2);
+  /*--color-shadow-button-s: #00000086;*/
+  
+  /* Espaçamentos */
+  --spacing-2xs: 0.45rem;  /* 4px */
+  --spacing-xs: 0.3rem;    /* 8px */
+  --spacing-sm: 0.8rem;    /* 12.8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 3rem;      /* 48px */
+  
+  /* Tamanhos */
+  --search-width-desktop: 210px;
+  --search-width-mobile: 94%;
+  --button-width: 35px;
+  --button-height: 40px;
+  
+  /* Fontes */
+  --font-size-sm: 0.875rem;
+  
+  /* Bordas */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  
+  /* Sombras */
+  --shadow-focus: 0 0 0 2px var(--color-shadow-focus);
+  /*--shadow-button: 5px 5px 10px 1px var(--color-shadow-button-s);*/
+  
+  /* Transições */
+  --transition-color: color 0.2s;
+  --transition-transform: transform 0.5s ease;
+  
+  /* Z-index */
+  --z-index-search: 1000;
+}
+
+.search-container {
+  position: fixed;
+  top: var(--spacing-md);
+  right: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  width: var(--search-width-desktop);
+  z-index: var(--z-index-search);
+}
+
+.search-input {
+  flex: 1;
+  padding: var(--spacing-xs);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-2xs);
+  color: var(--color-button-s);
+  transition: var(--transition-color);
+  width: var(--button-width);
+  height: var(--button-height);
+  /*box-shadow: 3px 4px 10px 0.5px #00000069;*/
+  margin-top: 0.3rem;
+  border-radius: 3px;
+}
+
+.search-button:hover {
+  color: var(--color-button-s-hover);
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    position: static;
+    width: var(--search-width-mobile);
+    margin-bottom: var(--spacing-md);
+    margin: auto;
+  }
+}
+
+@keyframes highlight {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+

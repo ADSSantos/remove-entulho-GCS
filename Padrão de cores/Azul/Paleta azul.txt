@@ -1,0 +1,14 @@
+Degrade tonalidade azul do mais fraco ao mais escuro
+
+
+
+#f3f5fb
+#e5e8f4
+#d0d7ed
+#b0bde0
+#8a9bd0
+#6e7dc3
+#5b65b5
+#454888
+#3b3e6d
+#282943

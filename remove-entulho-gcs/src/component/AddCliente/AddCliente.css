@@ -1,0 +1,211 @@
+:root {
+  /* Cores */
+  --color-white: #fff;
+  --color-background: #3d3d3d;
+  --color-input-bg: #e7e7e7;
+  --color-input-text: #495057;
+  --color-input-border: #d2e1f3;
+  --color-button: #5d5d5d;
+  --color-button-hover: #888888;
+  --color-heading: #e7e7e7;
+  --color-shadow: #0000006e;
+  --color-shadow-button: #00000086;
+  
+  /* Espaçamentos */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.375rem;  /* 6px */
+  --spacing-md: 0.75rem;   /* 12px */
+  --spacing-lg: 1rem;      /* 16px */
+  --spacing-xl: 1.5rem;    /* 24px */
+  --spacing-xxl: 2rem;     /* 32px */
+  
+  /* Tamanhos */
+  --input-height-small: 30px;
+  --input-height-medium: 40px;
+  --input-height-large: 45px;
+  --input-height-default: 50px;
+  
+  /* Fontes */
+  --font-size-small: 0.8rem;
+  --font-size-normal: 1rem;
+  --font-size-medium: 1.2rem;
+  --font-size-large: 1.4rem;
+  --font-size-heading: 1.25rem;
+  
+  /* Bordas */
+  --border-radius: 0.25rem;
+  
+  /* Sombras */
+  --shadow-default: 5px 5px 10px 0.1px var(--color-shadow);
+  --shadow-button: 5px 5px 10px 1px var(--color-shadow-button);
+  --shadow-focus: 0 0 0 0.2rem rgba(255, 188, 216, 0.5);
+  
+  /* Transições */
+  --transition-default: 0.15s ease-in-out;
+}
+
+/* Resetando margens e configurando box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilização base */
+body {
+  background-color: var(--color-background);
+}
+
+.conteudo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 90%;
+  max-width: 100%;
+  align-items: stretch;
+  padding: var(--spacing-lg);
+  margin: auto;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  margin-top: var(--spacing-lg);
+}
+
+h1 {
+  font-size: var(--font-size-heading);
+  text-transform: uppercase;
+  color: var(--color-heading);
+  margin: var(--spacing-xs) 0;
+  text-align: center;
+  padding-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  animation: h1 2s ease 0s 1 normal forwards;
+}
+
+input {
+  display: block;
+  width: 100%;
+  height: var(--input-height-default);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-normal);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-input-text);
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-default), 
+              box-shadow var(--transition-default);
+  box-shadow: var(--shadow-default);
+}
+
+.btn-add {
+  color: var(--color-white);
+  cursor: pointer;
+  display: inline-block;
+  background-color: var(--color-button);
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-top: var(--spacing-xs);
+  font-weight: 400;
+  font-size: var(--font-size-normal);
+  line-height: 1.5;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-button);
+  transition: color var(--transition-default),
+              background-color var(--transition-default),
+              border-color var(--transition-default),
+              box-shadow var(--transition-default);
+}
+
+.btn-add:hover {
+  background-color: var(--color-button-hover);
+}
+
+input:focus,
+.btn-add:focus {
+  outline: 0;
+  border-color: var(--color-background);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Media Queries */
+@media (max-width: 200px) {
+  .conteudo {
+    width: 100%;
+    padding: var(--spacing-xs);
+    font-size: var(--font-size-small);
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  input {
+    height: var(--input-height-small);
+  }
+}
+
+@media (min-width: 201px) and (max-width: 768px) {
+  .conteudo {
+    width: 95%;
+    padding: var(--spacing-lg);
+    font-size: var(--font-size-normal);
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  input {
+    height: var(--input-height-medium);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .conteudo {
+    width: 80%;
+    padding: var(--spacing-xl);
+    font-size: var(--font-size-medium);
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  input {
+    height: var(--input-height-large);
+  }
+}
+
+@media (min-width: 1025px) {
+  .conteudo {
+    width: 50%;
+    padding: var(--spacing-xxl);
+    font-size: var(--font-size-large);
+  }
+
+  .form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  input {
+    height: var(--input-height-default);
+  }
+}
+
+@keyframes h1 {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}

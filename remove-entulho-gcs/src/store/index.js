@@ -1,15 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
-
-const initialState = {};
-
-const rootReducer = {
-  // Aqui vamos adicionar os reducers conforme criarmos
-};
+import { configureStore } from '@reduxjs/toolkit';
+import clientsReducer from "./ducks/clients";
 
 const store = configureStore({
-    reducer: rootReducer,
-    preloadedState: initialState,
-  // O DevTools já vem configurado por padrão no configureStore!
+  reducer: {
+    clients: clientsReducer
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+      thunk: true,
+    }),
 });
 
 export default store;
