@@ -87,6 +87,16 @@ h1 {
   animation: h1 2s ease 0s 1 normal forwards;
 }
 
+.img {
+  display: flex;
+  justify-content: center;
+  background-color: #d2e1f300;
+}
+
+img {
+  background-color: #49505700;
+}
+
 input {
   display: block;
   width: 100%;
@@ -167,6 +177,10 @@ input:focus,
   input {
     height: var(--input-height-medium);
   }
+
+  .img {
+    display: none;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -174,6 +188,7 @@ input:focus,
     width: 80%;
     padding: var(--spacing-xl);
     font-size: var(--font-size-medium);
+    
   }
 
   .form {
@@ -183,6 +198,10 @@ input:focus,
   input {
     height: var(--input-height-large);
   }
+
+  .img {
+    margin: auto;
+    }
 }
 
 @media (min-width: 1025px) {
@@ -199,6 +218,15 @@ input:focus,
   input {
     height: var(--input-height-default);
   }
+
+  .img {
+    margin: auto;
+    
+    }
+
+    img {
+      width: 20rem;
+    }
 }
 
 @keyframes h1 {
@@ -209,3 +237,4 @@ input:focus,
     opacity: 0;
   }
 }
+

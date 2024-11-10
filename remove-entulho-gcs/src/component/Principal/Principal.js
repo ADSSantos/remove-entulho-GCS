@@ -83,12 +83,17 @@ const Principal = () => {
   return (
     <div className="container">
       <h1>Gestão de Clientes e Serviços</h1>
+      
 
       <BuscarCliente
         value={searchTerm}
         onChange={handleSearchChange}
         onSearch={handleSearch}
       />
+
+      <div className="img">
+        <img  src="logo_remove_entulho-remove-fundo-escuro.png" alt=""></img>
+      </div>
 
       <AddCliente
         adicionarCliente={handleAddClient}
