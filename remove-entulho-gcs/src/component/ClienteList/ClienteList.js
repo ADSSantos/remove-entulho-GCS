@@ -1,4 +1,4 @@
-import React, { useRef , useEffect} from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -6,22 +6,26 @@ import { PatternFormat } from "react-number-format";
 import Swal from "sweetalert2";
 import { firebaseMiddleware } from "../../store/middleware/firebase";
 import "./ClienteList.css";
+import Fab from "@mui/material/Fab";
+import EditIcon from "@mui/icons-material/Edit";
+import AddCliente from "../AddCliente/AddCliente";
 
 function ListaDeClientes({ cliente }) {
   const dispatch = useDispatch();
-  const clienteRef = useRef(null)
+  const clienteRef = useRef(null);
+  const [showEdit, setShowEdit] = useState(false);
 
   // Quando o componente atualiza e está destacado, faz o scroll
   useEffect(() => {
     if (cliente.destacado && clienteRef.current) {
-      clienteRef.current.scrollIntoView({ 
-        behavior: 'smooth', // animação suave
-        block: 'center', // centraliza o elemento
-        inline: 'nearest'  // evita scroll horizontal desnecessário
+      clienteRef.current.scrollIntoView({
+        behavior: "smooth", // animação suave
+        block: "center", // centraliza o elemento
+        inline: "nearest", // evita scroll horizontal desnecessário
       });
-      clienteRef.current.classList.add('highlight');
+      clienteRef.current.classList.add("highlight");
       setTimeout(() => {
-        clienteRef.current?.classList.remove('highlight');
+        clienteRef.current?.classList.remove("highlight");
       }, 1000);
     }
   }, [cliente.destacado]);
@@ -57,23 +61,19 @@ function ListaDeClientes({ cliente }) {
   const handleRemoveClient = async () => {
     try {
       const result = await Swal.fire({
-        title: 'Tem certeza?',
+        title: "Tem certeza?",
         text: "Você não poderá reverter isso!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#0b8a15',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, delete!',
-        cancelButtonText: 'Cancelar'
+        confirmButtonColor: "#0b8a15",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, delete!",
+        cancelButtonText: "Cancelar",
       });
 
       if (result.isConfirmed) {
         await dispatch(firebaseMiddleware.removeClient(cliente));
-        Swal.fire(
-          'Deletado!',
-          'O cliente foi removido.',
-          'success'
-        );
+        Swal.fire("Deletado!", "O cliente foi removido.", "success");
       }
     } catch (error) {
       Swal.fire({
@@ -86,12 +86,16 @@ function ListaDeClientes({ cliente }) {
 
   const handleStatusChange = async (estaMarcado) => {
     try {
-      await dispatch(firebaseMiddleware.updateClientStatus(cliente, estaMarcado));
+      await dispatch(
+        firebaseMiddleware.updateClientStatus(cliente, estaMarcado)
+      );
       Swal.fire({
         icon: "success",
-        title: estaMarcado ? "Cliente marcado como concluído!" : "Cliente desmarcado",
+        title: estaMarcado
+          ? "Cliente marcado como concluído!"
+          : "Cliente desmarcado",
         timer: 1500,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
     } catch (error) {
       Swal.fire({
@@ -102,8 +106,12 @@ function ListaDeClientes({ cliente }) {
     }
   };
 
+  const handleClick = () => {
+    setShowEdit(true);
+  };
+
   return (
-    <div className="list" ref={clienteRef} >
+    <div className="list" ref={clienteRef}>
       <ul style={estilo}>
         <li style={estilo}>
           NIF: {""}
@@ -146,6 +154,29 @@ function ListaDeClientes({ cliente }) {
           checked={cliente.concluido || false}
           onChange={(e) => handleStatusChange(e.target.checked)}
         />
+
+        {showEdit && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <AddCliente
+                clienteParaEditar={cliente}
+                onClose={() => setShowEdit(false)}
+                isEditing={true}
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="edit">
+          <Fab
+            size="medium"
+            color="primary"
+            aria-label="edit"
+            onClick={handleClick}
+          >
+            <EditIcon />
+          </Fab>
+        </div>
       </ul>
     </div>
   );

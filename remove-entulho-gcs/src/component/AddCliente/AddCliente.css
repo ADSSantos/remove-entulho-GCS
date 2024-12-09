@@ -10,36 +10,36 @@
   --color-heading: #e7e7e7;
   --color-shadow: #0000006e;
   --color-shadow-button: #00000086;
-  
+
   /* Espaçamentos */
-  --spacing-xs: 0.25rem;   /* 4px */
-  --spacing-sm: 0.375rem;  /* 6px */
-  --spacing-md: 0.75rem;   /* 12px */
-  --spacing-lg: 1rem;      /* 16px */
-  --spacing-xl: 1.5rem;    /* 24px */
-  --spacing-xxl: 2rem;     /* 32px */
-  
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.375rem; /* 6px */
+  --spacing-md: 0.75rem; /* 12px */
+  --spacing-lg: 1rem; /* 16px */
+  --spacing-xl: 1.5rem; /* 24px */
+  --spacing-xxl: 2rem; /* 32px */
+
   /* Tamanhos */
   --input-height-small: 30px;
   --input-height-medium: 40px;
   --input-height-large: 45px;
   --input-height-default: 50px;
-  
+
   /* Fontes */
   --font-size-small: 0.8rem;
   --font-size-normal: 1rem;
   --font-size-medium: 1.2rem;
   --font-size-large: 1.4rem;
   --font-size-heading: 1.25rem;
-  
+
   /* Bordas */
   --border-radius: 0.25rem;
-  
+
   /* Sombras */
   --shadow-default: 5px 5px 10px 0.1px var(--color-shadow);
   --shadow-button: 5px 5px 10px 1px var(--color-shadow-button);
   --shadow-focus: 0 0 0 0.2rem rgba(255, 188, 216, 0.5);
-  
+
   /* Transições */
   --transition-default: 0.15s ease-in-out;
 }
@@ -109,8 +109,8 @@ input {
   background-color: var(--color-input-bg);
   border: 1px solid var(--color-input-border);
   border-radius: var(--border-radius);
-  transition: border-color var(--transition-default), 
-              box-shadow var(--transition-default);
+  transition: border-color var(--transition-default),
+    box-shadow var(--transition-default);
   box-shadow: var(--shadow-default);
 }
 
@@ -130,9 +130,8 @@ input {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-button);
   transition: color var(--transition-default),
-              background-color var(--transition-default),
-              border-color var(--transition-default),
-              box-shadow var(--transition-default);
+    background-color var(--transition-default),
+    border-color var(--transition-default), box-shadow var(--transition-default);
 }
 
 .btn-add:hover {
@@ -188,7 +187,6 @@ input:focus,
     width: 80%;
     padding: var(--spacing-xl);
     font-size: var(--font-size-medium);
-    
   }
 
   .form {
@@ -201,7 +199,7 @@ input:focus,
 
   .img {
     margin: auto;
-    }
+  }
 }
 
 @media (min-width: 1025px) {
@@ -221,20 +219,83 @@ input:focus,
 
   .img {
     margin: auto;
-    
-    }
+  }
 
-    img {
-      width: 20rem;
-    }
+  img {
+    width: 20rem;
+  }
 }
 
 @keyframes h1 {
-  0%, 50%, 100% {
+  0%,
+  50%,
+  100% {
     opacity: 1;
   }
-  25%, 75% {
+  25%,
+  75% {
     opacity: 0;
   }
 }
 
+.modal-overlay {
+  position: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: rgba(0, 0, 0, 0.329);
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.btn-cancel {
+  color: white;
+  color: var(--color-white);
+  cursor: pointer;
+  display: inline-block;
+  background-color: var(--color-button);
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-top: var(--spacing-xs);
+  font-weight: 400;
+  font-size: var(--font-size-normal);
+  line-height: 1.5;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-button);
+  transition: color var(--transition-default),
+    background-color var(--transition-default),
+    border-color var(--transition-default), box-shadow var(--transition-default);
+}
+
+.btn-cancel:hover {
+  background-color: var(--color-button-hover);
+}
+
+
+.img-entulho {
+  margin-left: 0px;
+  width: 500px;
+  height: 400px;
+  margin-top: -150px;
+  
+  
+}
+
+.img-contentor {
+  margin-left: 500px;
+  width: 500px;
+  height: 400px;
+  margin-top: -450px;
+}

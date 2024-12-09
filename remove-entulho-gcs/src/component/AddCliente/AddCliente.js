@@ -1,24 +1,36 @@
-// src/component/AddCliente/AddCliente.js
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react"; // Adicionado useEffect
+import { useDispatch } from "react-redux"; // Adicionado useDispatch
 import { PatternFormat } from "react-number-format";
 import { firebaseMiddleware } from "../../store/middleware/firebase";
-import "./AddCliente.css";
 import Swal from 'sweetalert2';
-
-function AddCliente() {
+import "./AddCliente.css";
+function AddCliente({ clienteParaEditar = null, onClose = null, isEditing = false }) {
   const dispatch = useDispatch();
-  const [nif, setNif] = useState("");
-  const [nome, setNome] = useState("");
-  const [contato, setContato] = useState("");
-  const [local, setLocal] = useState("");
-  const [data, setData] = useState("");
-  const [hora, setHora] = useState("");
-  const [tipo, setTipo] = useState("");
-  const [valor, setValor] = useState("");
+  const [nif, setNif] = useState(clienteParaEditar?.nif || "");
+  const [nome, setNome] = useState(clienteParaEditar?.nome || "");
+  const [contato, setContato] = useState(clienteParaEditar?.contato || "");
+  const [local, setLocal] = useState(clienteParaEditar?.local || "");
+  const [data, setData] = useState(clienteParaEditar?.data || "");
+  const [hora, setHora] = useState(clienteParaEditar?.hora || "");
+  const [tipo, setTipo] = useState(clienteParaEditar?.tipo || "");
+  const [valor, setValor] = useState(clienteParaEditar?.valor || "");
+
+  // Usar useEffect para atualizar os campos quando clienteParaEditar mudar
+  useEffect(() => {
+    if (clienteParaEditar) {
+      setNif(clienteParaEditar.nif || "");
+      setNome(clienteParaEditar.nome || "");
+      setContato(clienteParaEditar.contato || "");
+      setLocal(clienteParaEditar.local || "");
+      setData(clienteParaEditar.data || "");
+      setHora(clienteParaEditar.hora || "");
+      setTipo(clienteParaEditar.tipo || "");
+      setValor(clienteParaEditar.valor || "");
+    }
+  }, [clienteParaEditar]);
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault(); // Previne o comportamento padrão do formulário
+    e.preventDefault();
 
     const cliente = {
       nif,
@@ -32,17 +44,29 @@ function AddCliente() {
     };
 
     try {
-      // Espera a conclusão da operação antes de limpar o formulário
-      dispatch(firebaseMiddleware.addClient(cliente));
-      
-      // Se chegou aqui, significa que o cliente foi adicionado com sucesso
-      Swal.fire({
-        icon: "success",
-        title: "Cliente adicionado com sucesso!",
-        confirmButtonColor: "#0b8a15",
-      });
+      if (isEditing) {
+        // Se estiver editando, incluir o ID do cliente existente
+        await dispatch(firebaseMiddleware.updateClient({
+          ...cliente,
+          id: clienteParaEditar.id
+        }));
+        Swal.fire({
+          icon: "success",
+          title: "Cliente atualizado com sucesso!",
+          confirmButtonColor: "#0b8a15",
+        });
+        if (onClose) onClose();
+      } else {
+        // Lógica existente para adicionar novo cliente
+        await dispatch(firebaseMiddleware.addClient(cliente));
+        Swal.fire({
+          icon: "success",
+          title: "Cliente adicionado com sucesso!",
+          confirmButtonColor: "#0b8a15",
+        });
+      }
 
-      // Só limpa os campos após confirmação de sucesso
+      // Limpar campos
       setNif("");
       setNome("");
       setContato("");
@@ -55,12 +79,14 @@ function AddCliente() {
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Erro ao adicionar cliente",
-        text: "Não foi possível adicionar o cliente. Tente novamente.",
+        title: isEditing ? "Erro ao atualizar cliente" : "Erro ao adicionar cliente",
+        text: "Por favor, tente novamente.",
         confirmButtonColor: "#0b8a15",
       });
     }
   };
+
+
   return (
     <div className="conteudo">
       <form className="form" onSubmit={onSubmitHandler}>
@@ -154,12 +180,22 @@ function AddCliente() {
           placeholder="Digite o valor"
         />
 
-        <button className="btn-add" type="submit">
-          Adicionar
+<button className="btn-add" type="submit">
+          {isEditing ? "Atualizar" : "Adicionar"}
         </button>
+        
+        {isEditing && (
+          <button 
+            className="btn-cancel" 
+            type="button" 
+            onClick={onClose}
+          >
+            Cancelar
+          </button>
+        )}
       </form>
     </div>
   );
-}
+} 
 
 export default AddCliente;

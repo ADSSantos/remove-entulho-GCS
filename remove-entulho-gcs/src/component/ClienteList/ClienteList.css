@@ -60,6 +60,14 @@ li {
 .btn-list {
   margin-left: 17rem;
 }
+.edit{
+  margin-left: 22rem;
+  padding: 10px;
+  width: 50px;
+  
+}
+
+
 
 .checkbox {
   width: var(--size-checkbox);
@@ -86,6 +94,11 @@ li {
     margin-left: 0;
     margin-top: 0;
   }
+
+  .edit{
+    margin-left: 0;
+    margin-top: 0;
+  }
 }
 
 /* Celular */
@@ -103,6 +116,13 @@ li {
     margin-top: var(--spacing-md);
     text-align: right;
   }
+
+  .edit{
+    margin-left: auto;
+    margin-top: var(--spacing-md);
+    text-align: right;
+  }
+
 }
 
 /* Tablet */
@@ -116,6 +136,12 @@ li {
   }
 
   .btn-list, .checkbox {
+    margin-left: auto;
+    margin-top: var(--spacing-md);
+    text-align: right;
+  }
+
+  .edit{
     margin-left: auto;
     margin-top: var(--spacing-md);
     text-align: right;
@@ -136,6 +162,21 @@ li {
     margin-top: var(--spacing-md);
     text-align: end;
   }
+
+  .edit {
+    margin-left: auto;
+    margin-top: var(--spacing-md);
+    text-align: end;
+  }
+  .modal-content {
+    background-color: rgba(0, 0, 0, 0.329);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 948px;
+    
+  }
+  
 }
 
 @keyframes highlight {

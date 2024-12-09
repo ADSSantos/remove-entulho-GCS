@@ -60,5 +60,39 @@ export const firebaseMiddleware = {
       console.error('Erro ao atualizar status do cliente:', error);
       throw error;
     }
+  },
+
+  updateClient: (client) => async (dispatch) => {
+    try {
+      // Cria uma referência para o cliente específico
+      const clientRef = ref(database, `clients/${client.id}`);
+      
+      // Dados a serem atualizados
+      const dadosAtualizados = {
+        nif: client.nif,
+        nome: client.nome,
+        contato: client.contato,
+        local: client.local,
+        data: client.data,
+        hora: client.hora,
+        tipo: client.tipo,
+        valor: client.valor
+      };
+
+      // Atualiza no Realtime Database
+      await update(clientRef, dadosAtualizados);
+      
+      // Atualiza no Redux
+      dispatch(ClientActions.updateClient({
+        ...client,
+        ...dadosAtualizados
+      }));
+
+      return true;
+    } catch (error) {
+      console.error('Erro ao atualizar cliente:', error);
+      throw error;
+    }
   }
 };
+  

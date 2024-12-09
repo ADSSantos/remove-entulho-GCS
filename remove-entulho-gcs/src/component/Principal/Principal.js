@@ -95,6 +95,14 @@ const Principal = () => {
         <img  src="logo_remove_entulho-remove-fundo-escuro.png" alt=""></img>
       </div>
 
+      <div>
+        <img className="img-entulho" src="entulho_limpo-removebg-preview.png"></img> 
+      </div>
+
+      <div>
+        <img className="img-contentor" src="contentor-removebg-preview.png"></img> 
+      </div>
+
       <AddCliente
         adicionarCliente={handleAddClient}
       />

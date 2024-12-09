@@ -73,7 +73,7 @@ const BuscarCliente = () => {
         value={searchTerm}
         onValueChange={handleValueChange}
         format="###-###-###"
-        placeholder="Busca Cliente por numero de Telefone..."
+        placeholder="Busca Cliente "
         allowEmptyFormatting={false}
         mask="_"
         title="Busca Cliente por numero de Telefone..."
